@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
+
 
 @Entity
 @Data
@@ -17,8 +19,21 @@ import java.util.Date;
 public class factura {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(unique = false, length = 30,nullable = false)
     private String nombreReceptor;
+
+    @Column(unique = false, length = 10,nullable = false)
     private int valor;
+
+    @Column(unique = false, length = 10,nullable = false)
     private float cantidadDesechos;
+
+    @Column(unique = false, length = 20,nullable = false)
+    private String tipoDeResiduos;
+
+    @Column(unique = false, length = 20,nullable = false)
+    private Date fechaEmision;
 }
