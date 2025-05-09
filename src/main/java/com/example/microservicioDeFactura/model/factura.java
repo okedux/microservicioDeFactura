@@ -23,6 +23,12 @@ public class factura {
     private int id;
 
     @Column(unique = false, length = 30,nullable = false)
+    private int rutCliente;
+
+    @Column(unique = false, length = 1,nullable = false)
+    private String dvRut;
+
+    @Column(unique = false, length = 30,nullable = false)
     private String nombreReceptor;
 
     @Column(unique = false, length = 10,nullable = false)
