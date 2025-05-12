@@ -1,6 +1,5 @@
 package com.example.microservicioDeFactura.service;
 
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +27,6 @@ public class facturaService {
     }
 
     public void insertarFactura(factura nuevaFactura) {
-        facturaRepository.insertar(nuevaFactura);
+        facturaRepository.save(nuevaFactura);
     }
 }
