@@ -50,5 +50,11 @@ public class controllerFactura {
         facturaService.eliminarPorId(idEliminar);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/guardarFactura")
+    public ResponseEntity<Void> guardarFactura(@RequestBody factura nuevaFactura) {
+        facturaService.guardarFactura(nuevaFactura);
+        return ResponseEntity.ok().build();
+    }
     
 }

@@ -29,4 +29,8 @@ public class facturaService {
     public void eliminarPorId(int idEliminar) {
         facturaRepository.eliminarPorId(idEliminar);
     }
+
+    public void guardarFactura(factura nuevaFactura) {
+        facturaRepository.save(nuevaFactura);
+    }
 }
