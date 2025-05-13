@@ -8,25 +8,25 @@ import com.example.microservicioDeFactura.repository.FacturaRepository;
 
 @Service
 public class facturaService {
+
     @Autowired
     private FacturaRepository facturaRepository;
+
     public List<factura> listarFacturas() {
-        return facturaRepository.listarFacturas();
+        return (List<factura>) facturaRepository.findAll();
     }
 
-    public List<factura> buscarPorRut(String rutCliente) {
-        return facturaRepository.buscarPorRut(rutCliente);
+    public List<factura> buscarPorRut(int rutCliente) {
+        // Implementación de búsqueda por RUT
+        return null;
     }
 
-    public List<factura> buscarPorId(String idBuscar) {
-        return facturaRepository.buscarPorId(idBuscar);
+    public List<factura> buscarPorId(int idBuscar) {
+        // Implementación de búsqueda por ID
+        return null;
     }
 
-    public List<factura> eliminarPorId(String idEliminar) {
-        return facturaRepository.eliminarPorId(idEliminar);
-    }
-
-    public void insertarFactura(factura nuevaFactura) {
-        facturaRepository.save(nuevaFactura);
+    public void eliminarPorId(int idEliminar) {
+        facturaRepository.eliminarPorId(idEliminar);
     }
 }

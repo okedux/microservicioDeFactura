@@ -1,6 +1,4 @@
-spring.application.name=microservicioDeFactura
-
-server.port=8081
+insertar en aplication.properties
 
 spring.datasource.url=jdbc:mysql://localhost:3306/DB_Facturacion
 spring.datasource.username=root

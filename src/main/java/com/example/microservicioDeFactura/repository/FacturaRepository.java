@@ -1,29 +1,30 @@
 package com.example.microservicioDeFactura.repository;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import com.example.microservicioDeFactura.model.factura;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
-
-import com.example.microservicioDeFactura.model.factura;
-
 @Repository
-public interface FacturaRepository extends JpaRepository<factura, Integer>{
+public interface FacturaRepository extends CrudRepository<factura, Integer> {
 
     @Query("SELECT f FROM factura f")
     List<factura> listarFacturas();
 
-    @Query("select f from factura f where f.rutCliente" )
-    List<factura> buscarPorRut(@Param("rutCliente") String rutCliente);
+    @Query("SELECT f FROM factura f WHERE f.rutCliente = :rutCliente")
+    List<factura> buscarPorRut(int rutCliente);
 
-    @Query("select f from factura f where f.id" )
-    List<factura> buscarPorId(@Param("id") String idBuscar);
+    @Query("select f from factura f where f.id = :idBuscar" )
+    List<factura> buscarPorId(int idBuscar);
 
-    @Query("delete f from factura f where f.id" )
-    List<factura> eliminarPorId(@Param("id") String idEliminar);
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM factura f WHERE f.id = :id")
+    void eliminarPorId(int id);
 
 }
