@@ -27,4 +27,5 @@ public interface FacturaRepository extends CrudRepository<factura, Integer> {
     @Query("DELETE FROM factura f WHERE f.id = :id")
     void eliminarPorId(int id);
 
+
 }

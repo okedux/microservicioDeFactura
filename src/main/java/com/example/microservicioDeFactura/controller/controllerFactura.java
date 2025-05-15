@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,5 +57,16 @@ public class controllerFactura {
         facturaService.guardarFactura(nuevaFactura);
         return ResponseEntity.ok().build();
     }
-    
+
+    @PatchMapping("/actualizarFactura/{id}")
+    public ResponseEntity<Void> actualizarFactura(@PathVariable int id, @RequestBody factura facturaActualizada) {
+        if (facturaService.buscarPorId(facturaActualizada.getId())
+                .stream()
+                .anyMatch(f -> f.getId() == id)) {
+                    facturaService.guardarFactura(facturaActualizada);
+                    return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
