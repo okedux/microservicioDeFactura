@@ -54,6 +54,7 @@ public class controllerFactura {
 
     @PostMapping("/guardarFactura")
     public ResponseEntity<Void> guardarFactura(@RequestBody factura nuevaFactura) {
+        System.out.println("Factura recibida: " + nuevaFactura);
         facturaService.guardarFactura(nuevaFactura);
         return ResponseEntity.ok().build();
     }

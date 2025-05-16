@@ -40,6 +40,6 @@ public class factura {
     @Column(unique = false, length = 20,nullable = false)
     private String tipoDeResiduos;
 
-    @Column(unique = false, length = 20,nullable = false)
+    @Column(unique = false, length = 20)
     private Date fechaEmision;
 }
