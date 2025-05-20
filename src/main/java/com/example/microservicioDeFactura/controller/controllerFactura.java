@@ -39,12 +39,20 @@ public class controllerFactura {
         return ResponseEntity.ok(facturas);
     }
     @GetMapping("/buscarPorRut/{rutCliente}")
-    public List<factura> buscarPorRut(@PathVariable int rutCliente) {
-         return facturaService.buscarPorRut(rutCliente);
+    public ResponseEntity<List<factura>> buscarPorRut(@PathVariable int rutCliente) {
+        List<factura> factura = facturaService.buscarPorRut(rutCliente);
+        if (factura.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(factura);
     }
-    @GetMapping("/buscarPorId/{idBuscar}")
-    public List<factura> buscarPorId(@PathVariable int idBuscar) {
-        return facturaService.buscarPorId(idBuscar);
+    @GetMapping("/buscarPorId/{id}")
+    public ResponseEntity<List<factura>> buscarPorId(@PathVariable int id) {
+        List<factura> factura = facturaService.buscarPorId(id);
+        if (factura.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(factura);
     }
     @DeleteMapping("/eliminarPorId/{idEliminar}")
     public ResponseEntity<Void> eliminarPorId(@PathVariable int idEliminar) {

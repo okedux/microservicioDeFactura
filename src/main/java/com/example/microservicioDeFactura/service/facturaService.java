@@ -17,13 +17,11 @@ public class facturaService {
     }
 
     public List<factura> buscarPorRut(int rutCliente) {
-        // Implementación de búsqueda por RUT
-        return null;
+        return facturaRepository.buscarPorRut(rutCliente);
     }
 
     public List<factura> buscarPorId(int idBuscar) {
-        // Implementación de búsqueda por ID
-        return null;
+        return facturaRepository.buscarPorId(idBuscar);
     }
 
     public void eliminarPorId(int idEliminar) {
