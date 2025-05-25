@@ -25,8 +25,8 @@ public class factura {
     @Column(unique = false, length = 1, nullable = false)
     private String dvRut;
 
-    @Column(unique = false, length = 30, nullable = false)
-    private String nombreReceptor;
+    @ManyToOne
+    private Cliente cliente;
 
     @Column(unique = false, length = 10, nullable = false)
     private int valor;
@@ -34,8 +34,8 @@ public class factura {
     @Column(unique = false, length = 10, nullable = false)
     private float cantidadDesechos;
 
-    @Column(unique = false, length = 20, nullable = false)
-    private String tipoDeResiduos;
+    @OneToMany
+    private Residuo residuo;
 
     @Column(unique = false, length = 20)
     private Date fechaEmision;
