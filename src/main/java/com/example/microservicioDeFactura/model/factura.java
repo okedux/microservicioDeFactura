@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,7 +35,7 @@ public class factura {
     @Column(unique = false, length = 10, nullable = false)
     private float cantidadDesechos;
 
-    @OneToMany
+    @ManyToOne
     private Residuo residuo;
 
     @Column(unique = false, length = 20)

@@ -1,7 +1,6 @@
 package com.example.microservicioDeFactura.model;
 
 import lombok.*;
-import jakarta.persistence.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

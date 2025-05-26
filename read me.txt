@@ -8,3 +8,28 @@ spring.jpa.hibernate.ddl-auto=create-drop
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+{
+  "rutCliente": 12345678,
+  "dvRut": "9",
+  "cliente": {
+    "id": 1,
+    "nombreEmpresa": "Empresa Ejemplo",
+    "rutEmpresa": "12345678-9",
+    "contacto": "Juan Pérez",
+    "correo": "contacto@empresa.com",
+    "direccion": "Calle Falsa 123, Ciudad"
+  },
+  "valor": 50000,
+  "cantidadDesechos": 12.5,
+  "residuo": {
+    "id": 1,
+    "nombre": "Papel",
+    "tipo": "Reciclable",
+    "peso": "10kg",
+    "peligrosidad": "Bajo",
+    "empresaEmisora": "Empresa S.A.",
+    "volumen": "5m3",
+    "clasificacion": "Orgánico"
+  }
+}

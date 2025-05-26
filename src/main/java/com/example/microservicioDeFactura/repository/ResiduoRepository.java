@@ -13,7 +13,7 @@ import com.example.microservicioDeFactura.model.Residuo;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface ResiduoRepository extends JpaRepository<Residuo, Long> {
+public interface ResiduoRepository extends JpaRepository<Residuo, Integer> {
 
     @Query("SELECT r FROM Residuo r")
     List<Residuo> listarFacturas();

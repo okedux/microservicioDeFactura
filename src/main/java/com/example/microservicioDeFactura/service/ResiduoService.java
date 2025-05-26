@@ -22,7 +22,7 @@ public class ResiduoService {
         return residuoRepository.findAll();
     }
 
-    public void eliminarPorId(Long id) {
+    public void eliminarPorId(Integer id) {
         residuoRepository.deleteById(id);
     }
 
@@ -30,11 +30,11 @@ public class ResiduoService {
         residuoRepository.save(nuevoResiduo);
     }
 
-    public Optional<Residuo> findById(Long id) {
+    public Optional<Residuo> findById(Integer id) {
         return residuoRepository.findById(id);
     }
 
-    public void actualizar(Long id, Residuo datosActualizados) {
+    public void actualizar(Integer id, Residuo datosActualizados) {
         Optional<Residuo> existenteOpt = residuoRepository.findById(id);
         if (existenteOpt.isPresent()) {
             Residuo existente = existenteOpt.get();

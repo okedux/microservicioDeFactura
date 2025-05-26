@@ -35,14 +35,14 @@ public class ResiduoController {
     }
 
     @GetMapping("/buscarPorId/{id}")
-    public ResponseEntity<Residuo> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Residuo> buscarPorId(@PathVariable Integer id) {
         Optional<Residuo> residuo = residuoService.findById(id);
         return residuo.map(ResponseEntity::ok)
                       .orElseGet(() -> ResponseEntity.noContent().build());
     }
 
     @DeleteMapping("/eliminarPorId/{id}")
-    public ResponseEntity<Void> eliminarPorId(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminarPorId(@PathVariable Integer id) {
         Optional<Residuo> residuo = residuoService.findById(id);
         if (residuo.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -61,7 +61,7 @@ public class ResiduoController {
     }
 
     @PatchMapping("/actualizarResiduos/{id}")
-    public ResponseEntity<Void> actualizar(@PathVariable Long id, @RequestBody Residuo nuevoResiduo) {
+    public ResponseEntity<Void> actualizar(@PathVariable Integer id, @RequestBody Residuo nuevoResiduo) {
         Optional<Residuo> existente = residuoService.findById(id);
         if (existente.isEmpty()) {
             return ResponseEntity.notFound().build();
