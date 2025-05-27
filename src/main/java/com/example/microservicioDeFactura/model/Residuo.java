@@ -16,28 +16,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Residuo {
-    @Id
+@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique= false, length= 30, nullable= false)
+    @Column(nullable= false, length= 30)
     private String nombre;
 
-    @Column(unique= false, length= 30, nullable= false)
+    @Column(nullable= false, length= 30)
     private String tipo;
 
-    @Column(unique= false, length= 10, nullable= false)
-    private String peso;
+    @Column(nullable= false)
+    private Double peso;
 
-    @Column(unique= false, length= 6, nullable= false)
+    @Column(nullable= false, length= 10)
+    private String unidadMedida;
+    
+    @Column(nullable= false, length= 6)
     private String peligrosidad;
 
-    @Column(unique= false, length= 20, nullable= false)
+    @Column(nullable= false, length= 20)
     private String empresaEmisora;
 
-    @Column(unique= false, length= 8, nullable= false)
-    private String volumen;
+    @Column(nullable= false)
+    private Double volumen;
 
-    @Column(unique= false, length= 10, nullable= false)
+    @Column(nullable= false, length= 10)
     private String clasificacion;
+
 }
+

@@ -1,3 +1,4 @@
+
 package com.example.microservicioDeFactura.model;
 
 import jakarta.persistence.*;
@@ -7,24 +8,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "factura")
-public class factura {
+public class Factura {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(unique = false, length = 30, nullable = false)
-    private int rutCliente;
-
-    @Column(unique = false, length = 1, nullable = false)
-    private String dvRut;
 
     @ManyToOne
     private Cliente cliente;

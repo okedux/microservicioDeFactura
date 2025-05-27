@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.microservicioDeFactura.model.factura;
+import com.example.microservicioDeFactura.model.Factura;
 import com.example.microservicioDeFactura.repository.FacturaRepository;
 import com.example.microservicioDeFactura.service.facturaService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,38 +21,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/factura/v1")
 public class controllerFactura {
 
-    private final FacturaRepository facturaRepository;
-
     @Autowired
     private facturaService facturaService;
 
     controllerFactura(FacturaRepository facturaRepository) {
-        this.facturaRepository = facturaRepository;
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<factura>> listarFacturas() {
-        List<factura> facturas = facturaService.listarFacturas();
+    public ResponseEntity<List<Factura>> listarFacturas() {
+        List<Factura> facturas = facturaService.listarFacturas();
         if(facturas.isEmpty()){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(facturas);
     }
     @GetMapping("/buscarPorRut/{rutCliente}")
-    public ResponseEntity<List<factura>> buscarPorRut(@PathVariable int rutCliente) {
-        List<factura> factura = facturaService.buscarPorRut(rutCliente);
-        if (factura.isEmpty()) {
+    public ResponseEntity<List<Factura>> buscarPorRutEmpresa(@PathVariable String rutEmpresa) {
+        List<Factura> facturas = facturaService.buscarPorRutEmpresa(rutEmpresa);
+        if (facturas.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(factura);
+        return ResponseEntity.ok(facturas);
     }
     @GetMapping("/buscarPorId/{id}")
-    public ResponseEntity<List<factura>> buscarPorId(@PathVariable int id) {
-        List<factura> factura = facturaService.buscarPorId(id);
-        if (factura.isEmpty()) {
+    public ResponseEntity<List<Factura>> buscarPorId(@PathVariable int id) {
+        List<Factura> facturas = facturaService.buscarPorId(id);
+        if (facturas.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(factura);
+        return ResponseEntity.ok(facturas);
     }
     @DeleteMapping("/eliminarPorId/{idEliminar}")
     public ResponseEntity<Void> eliminarPorId(@PathVariable int idEliminar) {
@@ -61,14 +58,14 @@ public class controllerFactura {
     }
 
     @PostMapping("/guardarFactura")
-    public ResponseEntity<Void> guardarFactura(@RequestBody factura nuevaFactura) {
+    public ResponseEntity<Void> guardarFactura(@RequestBody Factura nuevaFactura) {
         System.out.println("Factura recibida: " + nuevaFactura);
         facturaService.guardarFactura(nuevaFactura);
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/actualizarFactura/{id}")
-    public ResponseEntity<Void> actualizarFactura(@PathVariable int id, @RequestBody factura facturaActualizada) {
+    public ResponseEntity<Void> actualizarFactura(@PathVariable int id, @RequestBody Factura facturaActualizada) {
         if (facturaService.buscarPorId(facturaActualizada.getId())
                 .stream()
                 .anyMatch(f -> f.getId() == id)) {
