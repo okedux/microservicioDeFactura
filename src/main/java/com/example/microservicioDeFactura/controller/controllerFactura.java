@@ -35,7 +35,7 @@ public class controllerFactura {
         }
         return ResponseEntity.ok(facturas);
     }
-    @GetMapping("/buscarPorRut/{rutCliente}")
+    @GetMapping("/buscarPorRut/{rutEmpresa}")
     public ResponseEntity<List<Factura>> buscarPorRutEmpresa(@PathVariable String rutEmpresa) {
         List<Factura> facturas = facturaService.buscarPorRutEmpresa(rutEmpresa);
         if (facturas.isEmpty()) {
