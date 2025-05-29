@@ -1,6 +1,6 @@
 package com.example.microservicioDeFactura.repository;
 
-import com.example.microservicioDeFactura.model.Cliente;
+import com.example.microservicioDeFactura.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

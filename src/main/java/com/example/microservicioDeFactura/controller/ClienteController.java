@@ -27,7 +27,7 @@ public class ClienteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/crear")
+    @PostMapping
     public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) {
         Cliente nuevo = clienteService.guardar(cliente);
         return ResponseEntity.ok(nuevo);
