@@ -1,11 +1,12 @@
 package com.example.microservicioDeFactura.service;
 
 import com.example.microservicioDeFactura.model.Cliente;
-import com.example.microservicioDeFactura.repository.ClienteRepository;
+import com.example.microservicioDeFactura.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class ClienteService {

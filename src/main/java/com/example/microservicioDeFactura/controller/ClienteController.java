@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+
+
 @RestController
 @RequestMapping("/api/v1/clientes")
 public class ClienteController {
@@ -15,25 +18,35 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping
+
+      // GET: Listar todos los clientes
+
+    @GetMapping("/listarTodos")
     public List<Cliente> listarTodos() {
         return clienteService.listarTodos();
     }
 
-    @GetMapping("/{id}")
+    // GET: Obtener cliente por ID
+
+    @GetMapping("/obtenerPorId/{id}")
     public ResponseEntity<Cliente> obtenerPorId(@PathVariable Long id) {
         return clienteService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/crear")
+
+    // POST: Crear un nuevo cliente
+
+    @PostMapping("/crearCliente")
     public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) {
         Cliente nuevo = clienteService.guardar(cliente);
         return ResponseEntity.ok(nuevo);
     }
 
-    @PutMapping("/{id}")
+      // PUT: Actualizar cliente por ID
+
+    @PutMapping("/actualizarClientePorId/{id}")
     public ResponseEntity<Cliente> actualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
         return clienteService.buscarPorId(id)
                 .map(existente -> {
@@ -44,7 +57,9 @@ public class ClienteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    // DELETE: Eliminar cliente por ID
+    
+    @DeleteMapping("/eliminarClientePorId/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         if (clienteService.buscarPorId(id).isPresent()) {
             clienteService.eliminar(id);
@@ -53,7 +68,7 @@ public class ClienteController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/rut/{rutEmpresa}")
+    @GetMapping("/obtenerPorRut/{rutEmpresa}")
     public ResponseEntity<Cliente> obtenerPorRut(@PathVariable String rutEmpresa) {
         return clienteService.buscarPorRut(rutEmpresa)
                 .map(ResponseEntity::ok)
