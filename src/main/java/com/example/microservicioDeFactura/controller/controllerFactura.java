@@ -58,17 +58,15 @@ public class controllerFactura {
     }
 
     /**
-     * Busca facturas por ID.
-     * @param id ID de la factura.
-     * @return Lista de facturas o 204 si no hay resultados.
-     */
+         * Busca una factura por ID.
+         * @param id ID de la factura.
+         * @return Factura encontrada o 204 si no hay resultados.
+         */
     @GetMapping("/buscarPorId/{id}")
-    public ResponseEntity<List<Factura>> buscarPorId(@PathVariable int id) {
-        List<Factura> facturas = facturaService.buscarPorId(id);
-        if (facturas.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(facturas);
+    public ResponseEntity<Factura> buscarPorId(@PathVariable int id) {    
+        return facturaService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.noContent().build());
     }
 
     /**

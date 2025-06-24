@@ -5,7 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import com.example.microservicioDeFactura.service.facturaService;
-import com.example.microservicioDeFactura.controller.controllerFacturaV2;
+import com.example.microservicioDeFactura.controller.controllerFactura;
 import com.example.microservicioDeFactura.model.Factura;
 import com.example.microservicioDeFactura.model.Cliente;
 import com.example.microservicioDeFactura.model.Residuo;
@@ -26,7 +26,7 @@ import java.util.Optional;
  * Test de integración para el controlador controllerFacturaV2.
  * Verifica los endpoints CRUD y de consulta de facturas.
  */
-@WebMvcTest(controllerFacturaV2.class)
+@WebMvcTest(controllerFactura.class)
 public class ControllerFacturatest {
 
     @Autowired
