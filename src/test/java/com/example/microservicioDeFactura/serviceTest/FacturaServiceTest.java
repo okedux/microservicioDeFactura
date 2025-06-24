@@ -17,6 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * Test unitarios para el servicio facturaService.
+ * Verifica la lógica de negocio y la interacción con el repositorio de facturas.
+ */
 class FacturaServiceTest {
 
     @Mock
@@ -29,6 +33,9 @@ class FacturaServiceTest {
     private Cliente cliente;
     private Residuo residuo;
 
+    /**
+     * Inicializa los objetos de prueba antes de cada test.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -60,6 +67,9 @@ class FacturaServiceTest {
         factura.setResiduo(residuo);
     }
 
+    /**
+     * Prueba listar todas las facturas.
+     */
     @Test
     void testListarFacturas() {
         when(facturaRepository.findAll()).thenReturn(List.of(factura));
@@ -68,6 +78,9 @@ class FacturaServiceTest {
         assertEquals(factura.getId(), facturas.get(0).getId());
     }
 
+    /**
+     * Prueba buscar facturas por RUT de empresa.
+     */
     @Test
     void testBuscarPorRutEmpresa() {
         when(facturaRepository.buscarPorRutEmpresa("12345678-9")).thenReturn(List.of(factura));
@@ -76,6 +89,9 @@ class FacturaServiceTest {
         assertEquals("Empresa Test", facturas.get(0).getCliente().getNombreEmpresa());
     }
 
+    /**
+     * Prueba buscar facturas por ID.
+     */
     @Test
     void testBuscarPorId() {
         when(facturaRepository.buscarPorId(1)).thenReturn(List.of(factura));
@@ -84,6 +100,9 @@ class FacturaServiceTest {
         assertEquals(1, facturas.get(0).getId());
     }
 
+    /**
+     * Prueba eliminar una factura por su ID.
+     */
     @Test
     void testEliminarPorId() {
         doNothing().when(facturaRepository).eliminarPorId(1);
@@ -91,6 +110,9 @@ class FacturaServiceTest {
         verify(facturaRepository, times(1)).eliminarPorId(1);
     }
 
+    /**
+     * Prueba guardar una factura.
+     */
     @Test
     void testGuardarFactura() {
         when(facturaRepository.save(any(Factura.class))).thenReturn(factura);

@@ -5,7 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import com.example.microservicioDeFactura.service.facturaService;
-import com.example.microservicioDeFactura.controller.controllerFactura;
+import com.example.microservicioDeFactura.controller.controllerFacturaV2;
 import com.example.microservicioDeFactura.model.Factura;
 import com.example.microservicioDeFactura.model.Cliente;
 import com.example.microservicioDeFactura.model.Residuo;
@@ -21,7 +21,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Date;
 import java.util.List;
 
-@WebMvcTest(controllerFactura.class)
+/**
+ * Test de integración para el controlador controllerFacturaV2.
+ * Verifica los endpoints CRUD y de consulta de facturas.
+ */
+@WebMvcTest(controllerFacturaV2.class)
 public class ControllerFacturatest {
 
     @Autowired
@@ -35,6 +39,9 @@ public class ControllerFacturatest {
 
     private Factura factura;
 
+    /**
+     * Inicializa una factura de prueba antes de cada test.
+     */
     @BeforeEach
     void setUp() {
         Cliente cliente = new Cliente();
@@ -65,6 +72,9 @@ public class ControllerFacturatest {
         factura.setFechaEmision(new Date());
     }
 
+    /**
+     * Prueba el endpoint para listar todas las facturas.
+     */
     @Test
     void testListarFacturas() throws Exception {
         when(facturaService.listarFacturas()).thenReturn(List.of(factura));
@@ -76,6 +86,9 @@ public class ControllerFacturatest {
                 .andExpect(jsonPath("$[0].valor").value(factura.getValor()));
     }
 
+    /**
+     * Prueba el endpoint para buscar facturas por RUT de empresa.
+     */
     @Test
     void testBuscarPorRutEmpresa() throws Exception {
         when(facturaService.buscarPorRutEmpresa(factura.getCliente().getRutEmpresa())).thenReturn(List.of(factura));
@@ -87,6 +100,9 @@ public class ControllerFacturatest {
                 .andExpect(jsonPath("$[0].cliente.rutEmpresa").value(factura.getCliente().getRutEmpresa()));
     }
 
+    /**
+     * Prueba el endpoint para buscar facturas por ID.
+     */
     @Test
     void testBuscarPorId() throws Exception {
         when(facturaService.buscarPorId(factura.getId())).thenReturn(List.of(factura));
@@ -98,6 +114,9 @@ public class ControllerFacturatest {
                 .andExpect(jsonPath("$[0].valor").value(factura.getValor()));
     }
 
+    /**
+     * Prueba el endpoint para guardar una nueva factura.
+     */
     @Test
     void testGuardarFactura() throws Exception {
         doNothing().when(facturaService).guardarFactura(any(Factura.class));
@@ -108,6 +127,9 @@ public class ControllerFacturatest {
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Prueba el endpoint para actualizar una factura existente.
+     */
     @Test
     void testActualizarFactura() throws Exception {
         when(facturaService.buscarPorId(factura.getId())).thenReturn(List.of(factura));
@@ -119,6 +141,9 @@ public class ControllerFacturatest {
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Prueba el endpoint para eliminar una factura por su ID.
+     */
     @Test
     void testEliminarPorId() throws Exception {
         doNothing().when(facturaService).eliminarPorId(factura.getId());

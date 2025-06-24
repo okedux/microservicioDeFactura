@@ -1,6 +1,6 @@
 package com.example.microservicioDeFactura.assemblers;
 
-import com.example.microservicioDeFactura.controller.controllerFacturaV2;
+import com.example.microservicioDeFactura.controller.controllerFactura;
 import com.example.microservicioDeFactura.model.Factura;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -14,8 +14,8 @@ public class FacturaModelAssembler implements RepresentationModelAssembler<Factu
     @Override
     public EntityModel<Factura> toModel(Factura carrera) {
         return EntityModel.of(carrera,
-                linkTo(methodOn(controllerFacturaV2.class).buscarPorId(carrera.getId())).withSelfRel(),
-                linkTo(methodOn(controllerFacturaV2.class).listarFacturas()).withRel("facturas")
+                linkTo(methodOn(controllerFactura.class).buscarPorId(carrera.getId())).withSelfRel(),
+                linkTo(methodOn(controllerFactura.class).listarFacturas()).withRel("facturas")
         );
     }
 }

@@ -19,6 +19,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Test de integración para el controlador ClienteController.
+ * Verifica los endpoints CRUD y de consulta de clientes.
+ */
 @WebMvcTest(ClienteController.class)
 public class ClienteControllerTest {
 
@@ -33,6 +37,9 @@ public class ClienteControllerTest {
 
     private Cliente cliente;
 
+    /**
+     * Inicializa un cliente de prueba antes de cada test.
+     */
     @BeforeEach
     void setUp() {
         cliente = new Cliente();
@@ -44,6 +51,9 @@ public class ClienteControllerTest {
         cliente.setDireccion("Calle Falsa 123");
     }
 
+    /**
+     * Prueba el endpoint para listar todos los clientes.
+     */
     @Test
     void testListarTodos() throws Exception {
         when(clienteService.listarTodos()).thenReturn(List.of(cliente));
@@ -55,6 +65,9 @@ public class ClienteControllerTest {
                 .andExpect(jsonPath("$[0].nombreEmpresa").value(cliente.getNombreEmpresa()));
     }
 
+    /**
+     * Prueba el endpoint para obtener un cliente por su ID.
+     */
     @Test
     void testObtenerPorId() throws Exception {
         when(clienteService.buscarPorId(cliente.getId())).thenReturn(Optional.of(cliente));
@@ -66,6 +79,9 @@ public class ClienteControllerTest {
                 .andExpect(jsonPath("$.nombreEmpresa").value(cliente.getNombreEmpresa()));
     }
 
+    /**
+     * Prueba el endpoint para crear un cliente.
+     */
     @Test
     void testCrearCliente() throws Exception {
         when(clienteService.guardar(any(Cliente.class))).thenReturn(cliente);
@@ -78,6 +94,9 @@ public class ClienteControllerTest {
                 .andExpect(jsonPath("$.nombreEmpresa").value(cliente.getNombreEmpresa()));
     }
 
+    /**
+     * Prueba el endpoint para actualizar un cliente por su ID.
+     */
     @Test
     void testActualizarCliente() throws Exception {
         when(clienteService.buscarPorId(cliente.getId())).thenReturn(Optional.of(cliente));
@@ -91,6 +110,9 @@ public class ClienteControllerTest {
                 .andExpect(jsonPath("$.nombreEmpresa").value(cliente.getNombreEmpresa()));
     }
 
+    /**
+     * Prueba el endpoint para eliminar un cliente por su ID.
+     */
     @Test
     void testEliminarCliente() throws Exception {
         when(clienteService.buscarPorId(cliente.getId())).thenReturn(Optional.of(cliente));
@@ -100,6 +122,9 @@ public class ClienteControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    /**
+     * Prueba el endpoint para obtener un cliente por su RUT de empresa.
+     */
     @Test
     void testObtenerPorRut() throws Exception {
         when(clienteService.buscarPorRut(cliente.getRutEmpresa())).thenReturn(Optional.of(cliente));
