@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/factura/v1")
-public class controllerFactura {
+public class controllerFacturaV2 {
 
     @Autowired
     private facturaService facturaService;
 
-    controllerFactura(FacturaRepository facturaRepository) {
+    controllerFacturaV2(FacturaRepository facturaRepository) {
     }
 
     @GetMapping("/listar")
