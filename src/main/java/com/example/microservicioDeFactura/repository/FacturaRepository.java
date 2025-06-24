@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.microservicioDeFactura.model.Factura;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repositorio para operaciones CRUD y consultas personalizadas sobre la entidad Factura.
@@ -31,12 +32,12 @@ public interface FacturaRepository extends CrudRepository<Factura, Integer> {
     List<Factura> buscarPorRutEmpresa(String rutEmpresa);
 
     /**
-     * Busca facturas por su ID.
+     * Busca una factura por su ID.
      * @param idBuscar ID de la factura.
-     * @return Lista de facturas con el ID especificado.
+     * @return Factura con el ID especificado o vacío si no existe.
      */
     @Query("SELECT f FROM Factura f WHERE f.id = :idBuscar")
-    List<Factura> buscarPorId(int idBuscar);
+    Optional<Factura> buscarPorId(int idBuscar);
 
     /**
      * Elimina una factura por su ID.
@@ -45,6 +46,6 @@ public interface FacturaRepository extends CrudRepository<Factura, Integer> {
     @Modifying
     @Transactional
     @Query("DELETE FROM Factura f WHERE f.id = :id")
-    void eliminarPorId(int id);
+    void eliminarPorId(Integer id);
 
 }

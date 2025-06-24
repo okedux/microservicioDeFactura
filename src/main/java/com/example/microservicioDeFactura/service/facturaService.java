@@ -1,6 +1,7 @@
 package com.example.microservicioDeFactura.service;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.microservicioDeFactura.model.Factura;
@@ -34,11 +35,11 @@ public class facturaService {
     }
 
     /**
-     * Busca facturas por su ID.
+     * Busca una factura por su ID.
      * @param idBuscar ID de la factura.
-     * @return Lista de facturas con el ID especificado.
+     * @return Factura con el ID especificado o vacío si no existe.
      */
-    public List<Factura> buscarPorId(int idBuscar) {
+    public Optional<Factura> buscarPorId(int idBuscar) {
         return facturaRepository.buscarPorId(idBuscar);
     }
 
@@ -53,8 +54,9 @@ public class facturaService {
     /**
      * Guarda una nueva factura o actualiza una existente.
      * @param nuevaFactura Factura a guardar.
+     * @return Factura guardada.
      */
-    public void guardarFactura(Factura nuevaFactura) {
-        facturaRepository.save(nuevaFactura);
+    public Factura guardarFactura(Factura nuevaFactura) {
+        return facturaRepository.save(nuevaFactura);
     }
 }

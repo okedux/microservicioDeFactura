@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Test de integración para el controlador controllerFacturaV2.
@@ -105,7 +106,7 @@ public class ControllerFacturatest {
      */
     @Test
     void testBuscarPorId() throws Exception {
-        when(facturaService.buscarPorId(factura.getId())).thenReturn(List.of(factura));
+        when(facturaService.buscarPorId(factura.getId())).thenReturn(Optional.of(factura));
 
         mockMvc.perform(get("/api/factura/v1/buscarPorId/{id}", factura.getId()))
                 .andExpect(status().isOk())
@@ -132,7 +133,7 @@ public class ControllerFacturatest {
      */
     @Test
     void testActualizarFactura() throws Exception {
-        when(facturaService.buscarPorId(factura.getId())).thenReturn(List.of(factura));
+        when(facturaService.buscarPorId(factura.getId())).thenReturn(Optional.of(factura));
         doNothing().when(facturaService).guardarFactura(any(Factura.class));
 
         mockMvc.perform(patch("/api/factura/v1/actualizarFactura/{id}", factura.getId())

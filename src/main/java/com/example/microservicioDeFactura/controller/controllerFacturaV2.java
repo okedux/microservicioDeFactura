@@ -1,6 +1,7 @@
 package com.example.microservicioDeFactura.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import com.example.microservicioDeFactura.service.facturaService;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
+/**
+ * Controlador REST HATEOAS para operaciones CRUD sobre Facturas (v2).
+ */
 @RestController
 @RequestMapping("/api/factura/v2")
 public class controllerFacturaV2 {
@@ -36,8 +40,8 @@ public class controllerFacturaV2 {
 
     @GetMapping("/{id}")
     public ResponseEntity<EntityModel<Factura>> buscarPorId(@PathVariable Integer id) {
+        // Cambia buscarPorId para que devuelva Optional<Factura>
         return facturaService.buscarPorId(id)
-                .stream()
                 .map(facturaModelAssembler::toModel)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -45,8 +49,8 @@ public class controllerFacturaV2 {
 
     @PostMapping
     public ResponseEntity<EntityModel<Factura>> crearFactura(@RequestBody Factura factura) {
-        facturaService.guardarFactura(factura);
-        EntityModel<Factura> facturaModel = facturaModelAssembler.toModel(factura);
+        Factura guardada = facturaService.guardarFactura(factura);
+        EntityModel<Factura> facturaModel = facturaModelAssembler.toModel(guardada);
         return ResponseEntity
                 .created(facturaModel.getRequiredLink("self").toUri())
                 .body(facturaModel);

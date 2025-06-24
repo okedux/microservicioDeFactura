@@ -12,6 +12,7 @@ import org.mockito.*;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -94,10 +95,10 @@ class FacturaServiceTest {
      */
     @Test
     void testBuscarPorId() {
-        when(facturaRepository.buscarPorId(1)).thenReturn(List.of(factura));
-        List<Factura> facturas = clFacturaService.buscarPorId(1);
-        assertEquals(1, facturas.size());
-        assertEquals(1, facturas.get(0).getId());
+        when(facturaRepository.buscarPorId(1)).thenReturn(Optional.of(factura));
+        Optional<Factura> result = clFacturaService.buscarPorId(1);
+        assertTrue(result.isPresent());
+        assertEquals(1, result.get().getId());
     }
 
     /**
