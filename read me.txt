@@ -33,3 +33,5 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
     "clasificacion": "Orgánico"
   }
 }
+
+swagger: http://localhost:8081/doc/swagger-ui/index.html#/residuo-controller-v-2/listarResiduos
